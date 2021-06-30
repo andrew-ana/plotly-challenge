@@ -58,30 +58,26 @@ function optionChanged(subject_id) {
         Plotly.newPlot("bar-holder", barData, layout);
         
         // Let's make our bubble chart
+        var otu_ids = this_sample.otu_ids;
+        var sample_values = this_sample.sample_values;
+        var otu_labels = this_sample.otu_labels;
+
         var bubbleData = [];
+        var bubbleTrace = {
+            x: otu_ids,
+            y: sample_values,
+            mode: 'markers',
+            marker: {
+                size: sample_values,
+                color: otu_ids,
+            },
+            text: otu_labels,
+            };
+        bubbleData.push(bubbleTrace)
 
-        // samples.forEach(this_sample =>{
-            var otu_ids = this_sample.otu_ids;
-            var sample_values = this_sample.sample_values;
-            var otu_labels = this_sample.otu_labels;
-            var bubbleTrace = {
-                x: otu_ids,
-                y: sample_values,
-                mode: 'markers',
-                marker: {
-                  size: sample_values,
-                },
-                text: otu_labels,
-              };
-            bubbleData.push(bubbleTrace)
-        // });
-
-          
           var layout = {
             title: 'Bacteria Cultures per Sample',
             showlegend: false,
-            height: 600,
-            width: 600
           };
           
           Plotly.newPlot('bubble-holder', bubbleData, layout);
