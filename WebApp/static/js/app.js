@@ -29,7 +29,7 @@ function optionChanged(subject_id) {
         var sample_values = this_sample.sample_values.slice(0,9);
         console.log(otu_ids)
         console.log(sample_values);
-        
+        // Let's make our Bar Chart
         var trace1 = {
             x: sample_values,
             y: labeled_otu_ids,
@@ -37,15 +37,13 @@ function optionChanged(subject_id) {
             orientation: 'h',
             text: labeled_otu_ids
         };
-        
         var data = [trace1];
-        
         var layout = {
             title: "Sample Values by OTU ID",
             yaxis: {'categoryorder':'total ascending'}
         };
-        
         Plotly.newPlot("bar-holder", data, layout);
+
     }).catch(function(error) {
         console.log(error);
   });
