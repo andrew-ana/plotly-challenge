@@ -39,6 +39,7 @@ function optionChanged(subject_id) {
         var otu_ids = this_sample.otu_ids.slice(0,9);
         var labeled_otu_ids = otu_ids.map(d => "OTU "+d); // Add 'OTU' prefix to labels
         var sample_values = this_sample.sample_values.slice(0,9);
+        var otu_labels = this_sample.otu_labels.slice(0,9);
         console.log(otu_ids)
         console.log(sample_values);
         // Let's make our Bar Chart
@@ -47,29 +48,37 @@ function optionChanged(subject_id) {
             y: labeled_otu_ids,
             type: "bar",
             orientation: 'h',
-            text: labeled_otu_ids
+            text: otu_labels,
         };
         var barData = [barTrace];
         var layout = {
-            title: "Sample Values by OTU ID",
+            title: "Top 10 Bacteria Cultures Found",
             yaxis: {'categoryorder':'total ascending'}
         };
         Plotly.newPlot("bar-holder", barData, layout);
+        
         // Let's make our bubble chart
-        var bubbleTrace = {
-            x: otu_ids,
-            y: sample_values,
-            mode: 'markers',
-            marker: {
-              size: sample_values,
-            },
-            text: 
-          };
-          
-          var bubbleData = [bubbleTrace];
+        var bubbleData = [];
+
+        // samples.forEach(this_sample =>{
+            var otu_ids = this_sample.otu_ids;
+            var sample_values = this_sample.sample_values;
+            var otu_labels = this_sample.otu_labels;
+            var bubbleTrace = {
+                x: otu_ids,
+                y: sample_values,
+                mode: 'markers',
+                marker: {
+                  size: sample_values,
+                },
+                text: otu_labels,
+              };
+            bubbleData.push(bubbleTrace)
+        // });
+
           
           var layout = {
-            title: 'Marker Size',
+            title: 'Bacteria Cultures per Sample',
             showlegend: false,
             height: 600,
             width: 600
