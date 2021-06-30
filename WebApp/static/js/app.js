@@ -34,16 +34,18 @@ function optionChanged(subject_id) {
             x: sample_values,
             y: labeled_otu_ids,
             type: "bar",
-            orientation: 'h'
+            orientation: 'h',
+            text: labeled_otu_ids
         };
         
         var data = [trace1];
         
         var layout = {
-            title: "'Bar' Chart"
+            title: "Sample Values by OTU ID",
+            yaxis: {'categoryorder':'total ascending'}
         };
         
-        Plotly.newPlot("test-bar", data, layout);
+        Plotly.newPlot("bar-holder", data, layout);
     }).catch(function(error) {
         console.log(error);
   });
