@@ -24,16 +24,17 @@ function optionChanged(subject_id) {
         var subject_ids = samples.map(d =>d.id);
         // Let's get this subject from the option selector
         var this_sample = samples.filter(d => d.id == subject_id)[0];
-        console.log(this_sample)
-        var otu_ids = this_sample.otu_ids;
-        console.log("This Subject's ID")
-        console.log(this_sample.id);
-        console.log("This Subject's otu IDs")
+        var otu_ids = this_sample.otu_ids.slice(0,9);
+        var labeled_otu_ids = otu_ids.map(d => "OTU "+d);
+        var sample_values = this_sample.sample_values.slice(0,9);
         console.log(otu_ids)
+        console.log(sample_values);
+        
         var trace1 = {
-            x: otu_ids,
-            y: samples.samples,
-            type: "bar"
+            x: sample_values,
+            y: labeled_otu_ids,
+            type: "bar",
+            orientation: 'h'
         };
         
         var data = [trace1];
